@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				The cartography generations of Americans are used to...
+				<img src="lone-peak-1997.png">
+    <aside class="notes">
+    I work on an app called Gaia GPS, used by lots of outdoor recreationists in the for offline navigation on smartphones. The maps of choice for the US have been USGS 7.5 minute quads.
+    </aside>
+				</section>
+				<section>
+				is really out of date.
+				<img src="bozeman-1987.png">
+				Updated 1987
+
+    <aside class="notes">
+    But these maps are getting very out of date. Many maps were last updated in 1980s.
+    </aside>
+				</section>
+				<section>
+					US Topo - No There There
+					<img src="ustopo-madison.png">
+    <aside class="notes">
+    The USGS started from scratch making the new US Topo map series in 2009 as a replacement for the 7.5" quads. These maps are produced digitally, they have the classic USGS look, but there is so little information on on many maps that they are almost useless.
+    </aside>
+				</section>
+				<section>
+					OpenStreetMap to the rescue!
+					<img src="openstreetmap.png">
+					<aside class="notes">
+					You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+					</aside>
+				</section>
+				<section>
+					<img src="sotmus.jpg">
+					<aside class="notes">
+OpenStreetMap has over half a million contributors, some have only made 1 contribution, some map 50 hours a week. In many areas the map was not started from scratch, but was seeded with imports of public domain data. 
+					</aside>
+				</section>
+				<section>
+					<img src="osm-oldfaithful.png">
+					<aside class="notes">
+					In the US TIGER roads and NHD hydrology was imported, and starting from that base the community has built a  map. It's not perfect, especially in rural areas, but in highly trafficed areas it's really good, and in almost all areas it's better than US Topo.
+					</aside>
+				</section>
+				<section>
+					Not everything we need
+					<img src="no-contours.png">
+					<aside class="notes">
+But OpenStreetMap does not contain everything we need to make a topo map. It doesn't have contour lines.
+					</aside>
+				</section>
+				<section>
+					Digital Elevation Models, and Math
+					DEM image
+					<aside class="notes">
+					But contour lines can be generated from freely available digital elevation models, using Open Source tools.
+					</aside>
+				</section>
+				<section>
+					A few notes about technology
+					Tile Pyramid Image
+					<aside class="notes">
+The maps i'm going to be talking about are generated with vector tiles. Most maps you see on the web are tiled maps, but they are raster tiles. 
+					</aside>
+				</section>
+
+				<section>
+				tile-xray images.
+					<aside class="notes">
+					Vector tiles contain geometries and attributes instead of images.
+					</aside>
+				</section>
+
+				<section>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<aside class="notes">
+					</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
