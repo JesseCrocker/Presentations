@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>MAGIP 2016 presentation</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -25,47 +25,72 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
+				<h3>Rendering a world wide topo map using OpenStreetMap and Vector Tiles</h3>
+				<br>
+				Jesse Crocker
+				<br>
+				Gaia GPS
+				<br>
+				<img src="gaialogo.png" style="width:128px">
+				<br>
+				This presentation contains data © OpenStreetMap contributors
+				</section>
+
+				<section>
 				The cartography generations of Americans are used to...
 				<img src="lone-peak-1997.png">
-    <aside class="notes">
-    I work on an app called Gaia GPS, used by lots of outdoor recreationists in the for offline navigation on smartphones. The maps of choice for the US have been USGS 7.5 minute quads.
-    </aside>
+			    <aside class="notes">
+I work on an app called Gaia GPS, used by lots of outdoor recreationists for offline navigation on smartphones. The maps of choice for most of our users in the US is the USGS 7.5 minute quads. People have grown up with USGS quads so they are already familiar with them, and they are easy to read in the outdoor because they have very high contrast.
+			    </aside>
 				</section>
+
 				<section>
 				is really out of date.
 				<img src="bozeman-1987.png">
 				Updated 1987
-
-    <aside class="notes">
-    But these maps are getting very out of date. Many maps were last updated in 1980s.
-    </aside>
+    			<aside class="notes">
+But these maps are getting very out of date. Many maps were last updated in 1980, and the series was offially declared complete in 1992.
+		    	</aside>
 				</section>
+				
 				<section>
 					US Topo - No There There
 					<img src="ustopo-madison.png">
-    <aside class="notes">
-    The USGS started from scratch making the new US Topo map series in 2009 as a replacement for the 7.5" quads. These maps are produced digitally, they have the classic USGS look, but there is so little information on on many maps that they are almost useless.
-    </aside>
+				    <aside class="notes">
+The USGS started from scratch making the new US Topo map series in 2009 as a replacement for the 7.5" quads. These maps are produced digitally, they have the classic USGS look, and are updated on a 3 year cycle, but there is so little information on on many maps that they are almost useless for outdoor recreation.
+			    </aside>
 				</section>
+				
 				<section>
-					OpenStreetMap to the rescue!
+					Open Data to the rescue!
+					<img src="Open_Data_stickers.jpg" alt="Photo courtesy jwyg on flickr https://www.flickr.com/photos/jwyg/4528443760/">
+					<aside class="notes">
+You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+					</aside>
+				</section>				
+
+				<section>
+					OpenStreetMap
 					<img src="openstreetmap.png">
 					<aside class="notes">
-					You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
 					</aside>
 				</section>
+				
 				<section>
 					<img src="sotmus.jpg">
 					<aside class="notes">
 OpenStreetMap has over half a million contributors, some have only made 1 contribution, some map 50 hours a week. In many areas the map was not started from scratch, but was seeded with imports of public domain data. 
 					</aside>
 				</section>
+				
 				<section>
 					<img src="osm-oldfaithful.png">
 					<aside class="notes">
-					In the US TIGER roads and NHD hydrology was imported, and starting from that base the community has built a  map. It's not perfect, especially in rural areas, but in highly trafficed areas it's really good, and in almost all areas it's better than US Topo.
+In the US TIGER roads and NHD hydrology were imported, and starting from that base the community has built a map. It's not perfect, especially in rural areas, but in highly trafficed areas it's really good, and in almost all areas it's better than US Topo.
 					</aside>
 				</section>
+				
 				<section>
 					Not everything we need
 					<img src="no-contours.png">
@@ -73,58 +98,116 @@ OpenStreetMap has over half a million contributors, some have only made 1 contri
 But OpenStreetMap does not contain everything we need to make a topo map. It doesn't have contour lines.
 					</aside>
 				</section>
+
 				<section>
 					Digital Elevation Models, and Math
-					DEM image
+					<img src="dem.png">
 					<aside class="notes">
-					But contour lines can be generated from freely available digital elevation models, using Open Source tools.
+But contour lines can be generated from freely available digital elevation models, using Open Source tools.
 					</aside>
 				</section>
 
 				<section>
 					A few notes about technology
-					Tile Pyramid Image
+					<img src="webgl-earth2x.png">
 					<aside class="notes">
-The maps i'm going to be talking about are generated with vector tiles. Most maps you see on the web are tiled maps, but they are raster tiles. 
+Most maps on the internet are rendered as tiles. The map is rendered at multiple zoom levels, and each level has 4 times as many tiles as the previous level. At zoom 0 the whole planet is on 1 tile, at zoom 1 the planet is divided into 4 tiles, etc. At zoom 16 planet is divided into 4,294,967,296 tiles. The maps i'm talking about are tiled, but instead of raster image tiles, they are vector tiles.
 					</aside>
 				</section>
 
 				<section>
-				tile-xray images.
+					<img src="tile-xray.png">
 					<aside class="notes">
-					Vector tiles contain geometries and attributes instead of images.
+Vector tiles contain geometries and attributes instead of images.
 					</aside>
 				</section>
 
 				<section>
 					Why?
-					</ul>
 					<aside class="notes">
-					Vector tiles add an additional level of abstraction between the data is what the user sees, and that abstraction does have a cost, but the cost is outweighed by the benefits.
+Vector tiles add an additional level of abstraction between the data is what the user sees, and that abstraction does have a cost, in terms of developer effort, technological complexity, and file storage, but the cost is outweighed by the benefits.
 					</aside>
 				</section>
 
 				<section>
-					Multiple Styles.
+					Multiple Styles
+					<img src="multiple-styles.png">
 					<aside class="notes">
-					Querying features from a database is generally the slowest part of rendering a map, and with vector tiles you can make those queries once to generate the vector tiles, and then render multiple map styles from the same vector tiles.
+Querying features from a database is usually the slowest part of rendering a map, and with vector tiles you can make those queries once to generate the vector tiles, and then render multiple map styles from the same vector tiles.
 					</aside>
 				</section>
 
 				<section>
-				Multiple Scales
+					Pixel perfect at multiple scales
+					<br>
+					<img src="368@1x.png" style="width:128px;height:128px;"><img src="368@2x.png" style="width:256px;height:256px;"><img src="368@3x.png" style="width:384px;height:384px;">
+					<aside class="notes">
+Modern computer have a wide range of screen pixel densities, with vector tiles you can easily render pixel perfect rasters for any screen scale.
+					</aside>
+				</section>
+
+				<section>
+					On Device vector rendering
+					<br>
+					<img src="on-device-vector.gif">
+					<aside class="notes">
+Map intefaces on desktop computers generally jump between fixed zoom levels, but on mobile devices users expect to be able to continuously zoom, so those nice crisp raster tiles are usually being resampled to display on screen, but with vector tiles the map can be rendered crisply at any zoom level. Vector tiles provide another big advantage on mobile devices, fewer files to download at high zoom levels: many vector tile sets will only go to zoom 14 which is equivalant to a scale of 1:34,000, but the tiles contain enough resolution in the geometries they can produce good looking maps up to zoom 19, or 1:1,000. In cases where users are downloading maps for offline use this is a huge win.
+					</aside>
+				</section>
+
+				<section>
+					Software?
+					<br>
+					<img src="200px-Logo-mapnik.png">
+					<img src="nodejs.png">
+					<br>
+					<img src="PostGIS_logo.png">
+					<img src="Mapbox-Graphic.jpg">
+					<aside class="notes">
+All of the GIS and cartography I do is with open source software, some that i've written, but most written by other people. Much of the work on vector tiles has been done by Mapbox, and the specific tile format im talking about is called Mapbox Vector Tiles. ESRI has recently adopted the Mapbox Vector Tile format, but I know very little that ecosystem. Two of the main tools I use are Postgis for storing and querying data, and Mapnik, which is a map rendering library. There are lots of smaller tools that glue things together, and most of those are written in Javascript.
+					</aside>
+				</section>
+
+				<section>
+				Gaia Topo
+				<img src="gaiatopo-intro.gif">
+					<aside class="notes">
+This is Gaia Topo, a Topo map inspired by the USGS cartographic style, but produced with open data, with global coverage, rendered with vector tiles, available with elevations in feet or meters, and updated every 6 hours.
+					</aside>
+				</section>
+
+				<section>
+				Production Workflow
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
-				On Device vector rendering
+				Chalenges with vector tiles
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+				Peaks
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+				Low zoom levels
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
 					<aside class="notes">
 					</aside>
 				</section>
 
 
 				<section>
+					http://www.GaiaGPS.com
 					<aside class="notes">
 					</aside>
 				</section>
