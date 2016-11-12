@@ -80,6 +80,7 @@ But OpenStreetMap does not contain everything we need to make a topo map. It doe
 					But contour lines can be generated from freely available digital elevation models, using Open Source tools.
 					</aside>
 				</section>
+
 				<section>
 					A few notes about technology
 					Tile Pyramid Image
@@ -96,14 +97,38 @@ The maps i'm going to be talking about are generated with vector tiles. Most map
 				</section>
 
 				<section>
+					Why?
+					</ul>
+					<aside class="notes">
+					Vector tiles add an additional level of abstraction between the data is what the user sees, and that abstraction does have a cost, but the cost is outweighed by the benefits.
+					</aside>
+				</section>
+
+				<section>
+					Multiple Styles.
+					<aside class="notes">
+					Querying features from a database is generally the slowest part of rendering a map, and with vector tiles you can make those queries once to generate the vector tiles, and then render multiple map styles from the same vector tiles.
+					</aside>
+				</section>
+
+				<section>
+				Multiple Scales
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
+				On Device vector rendering
 					<aside class="notes">
 					</aside>
 				</section>
+
+
+				<section>
+					<aside class="notes">
+					</aside>
+				</section>
+
 			</div>
 		</div>
 
