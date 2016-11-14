@@ -49,7 +49,7 @@ I work on an app called Gaia GPS, used by lots of outdoor recreationists for off
 				<img src="bozeman-1987.png">
 				Updated 1987
     			<aside class="notes">
-But these maps are getting very out of date. Many maps were last updated in 1980, and the series was offially declared complete in 1992.
+But these maps are getting very out of date. Many maps were last updated in 1980, and the series was officially declared complete in 1992.
 		    	</aside>
 				</section>
 				
@@ -65,7 +65,7 @@ The USGS started from scratch making the new US Topo map series in 2009 as a rep
 					Open Data to the rescue!
 					<img src="Open_Data_stickers.jpg" alt="Photo courtesy jwyg on flickr https://www.flickr.com/photos/jwyg/4528443760/">
 					<aside class="notes">
-You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for Google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
 					</aside>
 				</section>				
 
@@ -73,7 +73,7 @@ You might be familiar with OpenStreetMap as that ugly map used by people too che
 					OpenStreetMap
 					<img src="openstreetmap.png">
 					<aside class="notes">
-You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for Google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
 					</aside>
 				</section>
 				
@@ -87,7 +87,7 @@ OpenStreetMap has over half a million contributors, some have only made 1 contri
 				<section>
 					<img src="osm-oldfaithful.png">
 					<aside class="notes">
-In the US TIGER roads and NHD hydrology were imported, and starting from that base the community has built a map. It's not perfect, especially in rural areas, but in highly trafficed areas it's really good, and in almost all areas it's better than US Topo.
+In the US TIGER roads and NHD hydrology were imported, and starting from that base the community has built a map. It's not perfect, especially in rural areas, but in highly trafficked areas it's really good, and in almost all areas it's better than US Topo.
 					</aside>
 				</section>
 				
@@ -111,7 +111,7 @@ But contour lines can be generated from freely available digital elevation model
 					A few notes about technology
 					<img src="webgl-earth2x.png">
 					<aside class="notes">
-Most maps on the internet are rendered as tiles. The map is rendered at multiple zoom levels, and each level has 4 times as many tiles as the previous level. At zoom 0 the whole planet is on 1 tile, at zoom 1 the planet is divided into 4 tiles, etc. At zoom 16 planet is divided into 4,294,967,296 tiles. The maps i'm talking about are tiled, but instead of raster image tiles, they are vector tiles.
+Most maps on the internet are rendered as tiles. The map is rendered at multiple zoom levels, and each level has 4 times as many tiles as the previous level. At zoom 0 the whole planet is on 1 tile, at zoom 1 the planet is divided into 4 tiles, etc. At zoom 16 planet is divided into 4,294,967,296 tiles. The maps I'm talking about are tiled, but instead of raster image tiles, they are vector tiles.
 					</aside>
 				</section>
 
@@ -151,7 +151,7 @@ Modern computer have a wide range of screen pixel densities, with vector tiles y
 					<br>
 					<img src="on-device-vector.gif">
 					<aside class="notes">
-Map intefaces on desktop computers generally jump between fixed zoom levels, but on mobile devices users expect to be able to continuously zoom, so those nice crisp raster tiles are usually being resampled to display on screen, but with vector tiles the map can be rendered crisply at any zoom level. Vector tiles provide another big advantage on mobile devices, fewer files to download at high zoom levels: many vector tile sets will only go to zoom 14 which is equivalant to a scale of 1:34,000, but the tiles contain enough resolution in the geometries they can produce good looking maps up to zoom 19, or 1:1,000. In cases where users are downloading maps for offline use this is a huge win.
+Map intefaces on desktop computers generally jump between fixed zoom levels, but on mobile devices users expect to be able to continuously zoom, so those nice crisp raster tiles are usually being re-sampled to display on screen, but with vector tiles the map can be rendered crisply at any zoom level. Vector tiles provide another big advantage on mobile devices, fewer files to download at high zoom levels: many vector tile sets will only go to zoom 14 which is equivalent to a scale of 1:34,000, but the tiles contain enough resolution in the geometries they can produce good looking maps up to zoom 19, or 1:1,000. In cases where users are downloading maps for offline use this is a huge win.
 					</aside>
 				</section>
 
@@ -164,7 +164,7 @@ Map intefaces on desktop computers generally jump between fixed zoom levels, but
 					<img src="PostGIS_logo.png">
 					<img src="Mapbox-Graphic.jpg">
 					<aside class="notes">
-All of the GIS and cartography I do is with open source software, some that i've written, but most written by other people. Much of the work on vector tiles has been done by Mapbox, and the specific tile format im talking about is called Mapbox Vector Tiles. ESRI has recently adopted the Mapbox Vector Tile format, but I know very little that ecosystem. Two of the main tools I use are Postgis for storing and querying data, and Mapnik, which is a map rendering library. There are lots of smaller tools that glue things together, and most of those are written in Javascript.
+All of the GIS and cartography I do is with open source software, some that I've written, but most written by other people. Much of the work on vector tiles has been done by Mapbox, and the specific tile format I'm talking about is called Mapbox Vector Tiles. ESRI has recently adopted the Mapbox Vector Tile format, but I know very little that ecosystem. Two of the main tools I use are Postgis for storing and querying data, and Mapnik, which is a map rendering library. There are lots of smaller tools that glue things together, and most of those are written in Javascript.
 					</aside>
 				</section>
 
@@ -182,7 +182,7 @@ This is Gaia Topo, a Topo map inspired by the USGS cartographic style, but produ
 					<img src="osm-topo-processing.png">
 					<br>
 					<aside class="notes">
-Last month Gaia Topo served 185 million raster tiles, proccessed 124 batches of updates from OpenStreetMap, and re-rendered 7 million vector tiles. We dont have enough time now to go over all the parts of the infrastructure needed to make that work, so im going to go over a slightly simplified version of the tile production workflow.
+Last month Gaia Topo served 185 million raster tiles, processed 124 batches of updates from OpenStreetMap, and re-rendered 7 million vector tiles. We don't have enough time now to go over all the parts of the infrastructure needed to make that work, so I'm going to go over a slightly simplified version of the tile production workflow.
 					</aside>
 				</section>
 
@@ -199,30 +199,202 @@ The contour lines are generated by downloading several different sets of digital
 				<section>
 					<img src="osm-workflow.png">
 					<aside class="notes">
-The complete set of OSM data is known as the planet file, currently the planet is about 33 GB. That file is processed with a tool called osm2pgsql that takes OSM data, either a full planet file, or a regional extract, and a style file that defines filering rules and transformations, and populates a postgres database. Some of the OSM data, like coastlines and ice sheets, requires additional processing steps and is made available as proccessed shapefiles, these shapefiles are downloaded and loaded into the same postgres database using shp2pgsql. Once the data is all loaded in the database, the vector tiles are rendered using Mapnik. Mapnik takes a tm2source file which defines a series of layers and a sql query for each layer, and generates the vector tiles. The tiles are then saved to amazon s3. When a client requests a tile that request goes to another instance of mapnik, this one has a tm2 file that contains a stylesheet to render vector tiles into rasters, and additional raster assets for icons and polygon fills. Mapnik requests the OSM vector tile, and a contour line vector tile,  combines the 2 together, applies the stylesheet, and then returns the raster to the client.
+The complete set of OSM data is known as the planet file, currently the planet is about 33 GB. That file is processed with a tool called osm2pgsql that takes OSM data, either a full planet file, or a regional extract, and a style file that defines filtering rules and transformations, and populates a postgres database. Some of the OSM data, like coastlines and ice sheets, requires additional processing steps and is made available as processed shapefiles, these shapefiles are downloaded and loaded into the same postgres database using shp2pgsql. Once the data is all loaded in the database, the vector tiles are rendered using Mapnik. Mapnik takes a tm2source file which defines a series of layers and a sql query for each layer, and generates the vector tiles. The tiles are then saved to amazon s3. When a client requests a tile that request goes to another instance of Mapnik, this one has a tm2 file that contains a stylesheet to render vector tiles into rasters, and additional raster assets for icons and polygon fills. Mapnik requests the OSM vector tile, and a contour line vector tile,  combines the 2 together, applies the stylesheet, and then returns the raster to the client.
 					</aside>
 				</section>
 
 				<section>
-				Chalenges with vector tiles
+					Challenges with vector tiles
+					<br>
+					<img src="cuttoff-labels.png">
 					<aside class="notes">
+One of the most challenging aspects of rendering maps with vector tiles is labeling. The technique that has traditionally been used when rendering raster tiles directly from a database is to render an area 6 tiles * 6 tiles as a single raster, slice that into tiles, and then throw away all of the tiles on the edges. That way labels can go across multiple tiles. When rendering rasters from vector tiles only 1 tile is processed at a time, which creates real problems when trying to place labels that might cross the boundaries of a tile. For the rendering to work properly each tile needs to know what is going to rendered near the edges of the adjacent tiles. The solution to this is to include data beyond the bounds of the tile in the tile, to avoid cutting off labels you have to include data from a buffer around the tile larger than the longest label that you might render. Labels must also all have fixed placement, they can't use a placement algorithm that reacts to nearby features. For line labels placement can't be fixed, because placements are calculated based on the curvature of the line, so the best solution is to just not allow labels to cross tile boundaries.
 					</aside>
 				</section>
 
 				<section>
-				Peaks
+					Polygon Labels
+					<br>
+					<img src="park-labels-bad.png">
 					<aside class="notes">
+It's a common technique to label the center of a polygon, but this doesn't work with vector tiles, because when a polygon crosses multiple tiles, each tile has it's own chunk of the polygon, and the polygon on each tile is also never what you want to do. The solution to this is to pre-calculate the label positions, and add them as a separate layer. GaiaTopo does this for several layers, including parks, and lakes.
 					</aside>
 				</section>
 
 				<section>
-				Low zoom levels
+					Peaks
+					<img src="peaks.png">
 					<aside class="notes">
+One of the features I wanted in Gaia Topo was to show prominent mountain peaks at all zoom levels, but choosing the peaks to show at each zoom level for the whole planet was too much work to do manually, so it had to be done algorithmically. My first approach was to just choose the highest N peaks on each tile, but that totally breaks down when including data in a buffer around the edge of the tile, because sometimes all the peaks would be in the buffer, and a peak near the edge of one tile wouldn't always be in the buffer of the next tile, in areas with clusters of peaks it tends to choose all the peaks in the cluster, even if they were within a few pixels of each other. So i needed a better way to sort the peaks, and a sort that was stable regardless of the bounds being queried. 
 					</aside>
 				</section>
 
 				<section>
+					<section>
+						<pre>
+SELECT DISTINCT ON(grid_point) * FROM (
+    SELECT osm_id, way, name,
+    CleanInt(ele) AS ele_meters,
+    CleanIntMetersToFeet(ele) AS ele_feet,
+    CleanInt0(ele) as ele_sort,
+    'peak' as type,
+    CASE
+    	  WHEN z(!scale_denominator!) <= 10 THEN LabelGrid(way, 128*!pixel_width!)
+    	  WHEN z(!scale_denominator!) <= 12 THEN LabelGrid(way, 96*!pixel_width!)
+    	  WHEN z(!scale_denominator!) < 14 THEN LabelGrid(way, 64*!pixel_width!)
+    	  ELSE ST_AsText(way)
+    END as grid_point
+    FROM planet_osm_point
+    WHERE
+    z(!scale_denominator!) > 6
+    AND
+    way && !bbox!
+    AND
+    "natural" IS NOT NULL
+    AND
+    "natural" in ('peak','volcano')
+)
+						</pre>
+						<aside class="notes">
+This is the SQL query I ended up with for the peak layer, and even if you're familiar with sql and PostGIS functions there are probably a few things in this queries that don't make sense, so I'll go over those first.
+						</aside>
+					</section>
+					<section>
+						Mapnik tokens
+						<br>
+						!scale_denominator!
+						<br>
+						!pixel_width!
+						<br>
+						!bbox!
+						<aside class="notes">
+Mapnik runs queries through a pre-processor before sending them to postgres, and looks for special tokens, words surrounded by ! that get replaced, this query uses 3. scale_denominator get replaced with the denominator of the scale of the map being rendered. pixel_width is the size of the pixel is the units of the coordinate system being used, in this case meters. !bbox! is the bounding box of the are being queried.
+						</aside>
+					</section>
+					<section>
+						<pre>
+create or replace function z (numeric)
+  returns integer
+  language sql
+  immutable
+  returns null on null input
+as $func$
+select
+  case
+    -- Don't bother if the scale is larger than ~zoom level 0
+    -- !scale_denominator! = 3.40282e+38 for zoom level 0
+    when $1 > 600000000 then 0
+    when $1 = 0 then null
+    else 
+    cast (round(log(2,559082264.028/$1)) as integer)
+  end;
+$func$;
+)
+						</pre>
+						<aside class="notes">
+This z functions takes mapniks scale_denominator token as input, and converts it to a tile zoom level.
+						</aside>
+					</section>
+					<section>
+						<pre>
+create or replace function LabelGrid (
+        g geometry,
+        grid_size numeric
+    )
+    returns text
+    language plpgsql immutable as
+$func$
+begin
+    if grid_size <= 0 then
+        return 'null';
+    end if;
+    if GeometryType(g) <> 'POINT' then
+        g := (select (ST_DumpPoints(g)).geom limit 1);
+    end if;
+    return ST_AsText(ST_SnapToGrid(
+        g,
+        grid_size/2,  -- x origin
+        grid_size/2,  -- y origin
+        grid_size,    -- x size
+        grid_size     -- y size
+    ));
+end;
+$func$;
+						</pre>
+						<aside class="notes">
+This LabelGrid function takes a geometry, and a grid size, it snaps the geometry to a grid, then returns a text representation of the geometry.
+						</aside>
+					</section>
+					<section>
+						<pre>
+create or replace function CleanInt0 (i text)
+    returns integer
+    language plpgsql immutable as
+$func$
+begin
+    IF i is null then
+    return 0;
+    ELSE
+    return cast(cast(i as float) as integer);
+    END IF;
+exception
+    when invalid_text_representation then
+        return 0;
+    when numeric_value_out_of_range then
+        return 0;
+    when SQLSTATE '22P02' then
+        return 0;
+end;
+$func$;
+						</pre>
+						<aside class="notes">
+Then we have 3 different functions with names that are variations on CleanInt. Sometimes the value of the elevation field in OpenStreetMap is not a valid number, so these functions deal with parsing it without throwing exceptions.
+						</aside>
+					</section>
+					<section>
+						<pre>
+SELECT DISTINCT ON(grid_point) * FROM (
+    SELECT osm_id, way, name,
+    CleanInt(ele) AS ele_meters,
+    CleanIntMetersToFeet(ele) AS ele_feet,
+    CleanInt0(ele) as ele_sort,
+    'peak' as type,
+    CASE
+    	  WHEN z(!scale_denominator!) <= 10 THEN LabelGrid(way, 128*!pixel_width!)
+    	  WHEN z(!scale_denominator!) <= 12 THEN LabelGrid(way, 96*!pixel_width!)
+    	  WHEN z(!scale_denominator!) < 14 THEN LabelGrid(way, 64*!pixel_width!)
+    	  ELSE ST_AsText(way)
+    END as grid_point
+    FROM planet_osm_point
+    WHERE
+    z(!scale_denominator!) > 6
+    AND
+    way && !bbox!
+    AND
+    "natural" IS NOT NULL
+    AND
+    "natural" in ('peak','volcano')
+) AS raw
+ORDER BY grid_point, ele_sort DESC, osm_id
+						</pre>
+						<aside class="notes">
+So now lets go through this query line by line. We'll ignore the first line, because that gets executed last.
+We select some field from the database, osm_id is the unique id in the OpenStreetMap database for this object, way is the field that holds the geometry, and name is the name, then we get the elevation 3 times, once as feet, and once as meters, but those 2 return null if the value isn't set, or is invalid, so we select it a third time with a function that returns 0 instead of null to use for sorting. Then we use our LabelGrid function to generate this grid_point value, that gets used by the first line of the query to only select a single feature on each grid point. The size of the grid varies by zoom, it's larger at smaller zoom levels, and at zoom 14 it doesn't snap to a grid at all, so all features get included.
+We're selecting from the planet_osm_point table, which is the table all our point features we're imported into.
+Next we do some filtering, first we check the zoom level, the query should only run at zoom levels greater than 6, then we check if the feature overlaps the bounding box of the tile being rendered, then we check the natural field to pick out features tagged as peaks and volcanoes.
+Then we order the features, grid_point must be first, because we're selecting distinct values based on that, then we sort by elevation, then we sort by osm_id to break ties in case 2 features have the same grid point and same elevation because we need this sorting to be stable.
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					Low zoom levels
+					<br>
+					OSM vs Natural Earth
+					<br>
+					<img src="roads-low-zoom.png">
 					<aside class="notes">
+Filtering the right data out of OpenStreetMap to display at low zoom levels is tricky, and requires human judgment to be applied in many cases to choose the right features to display. Rather than trying to do that filtering, I ended up using data from another source, NaturalEarth, that has been curated by humans at low zoom levels. Natural Earth is a public domain map dataset available at 1:10m, 1:50m, and 1:110 million scales, produced by volunteers and supported by NACIS. There are many datasets available, all curated by human cartographers, and most feature have a scalerank field that can be used to bring appropriate features for each zoom level.
 					</aside>
 				</section>
 
