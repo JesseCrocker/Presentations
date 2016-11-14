@@ -40,7 +40,7 @@
 				The cartography generations of Americans are used to...
 				<img src="lone-peak-1997.png">
 			    <aside class="notes">
-I work on an app called Gaia GPS, used by lots of outdoor recreationists for offline navigation on smartphones. The maps of choice for most of our users in the US is the USGS 7.5 minute quads. People have grown up with USGS quads so they are already familiar with them, and they are easy to read in the outdoor because they have very high contrast.
+I work on an app called Gaia GPS, used by outdoor recreationists for offline navigation on iOS and Android phones. The map of choice for most of our users in the US is the USGS 7.5 minute quad series. People have grown up with USGS quads so they are already familiar with them, and they are easy to read in the outdoor because they have very high contrast.
 			    </aside>
 				</section>
 
@@ -65,7 +65,7 @@ The USGS started from scratch making the new US Topo map series in 2009 as a rep
 					Open Data to the rescue!
 					<img src="Open_Data_stickers.jpg" alt="Photo courtesy jwyg on flickr https://www.flickr.com/photos/jwyg/4528443760/">
 					<aside class="notes">
-You might be familiar with OpenStreetMap as that ugly map used by people too cheap to pay for Google maps. But it's much more than that. It's a worldwide crowd-sourced open licensed database of geographic knowledge.
+So we decided to create a new topo map for Gaia GPS.
 					</aside>
 				</section>				
 
@@ -87,7 +87,7 @@ OpenStreetMap has over half a million contributors, some have only made 1 contri
 				<section>
 					<img src="osm-oldfaithful.png">
 					<aside class="notes">
-In the US TIGER roads and NHD hydrology were imported, and starting from that base the community has built a map. It's not perfect, especially in rural areas, but in highly trafficked areas it's really good, and in almost all areas it's better than US Topo.
+In the US, TIGER roads and NHD hydrology were imported, and starting from that base the community has built a map. It's not perfect, especially in rural areas, but in highly trafficked areas it's really good, and in almost all areas it's better than US Topo, and its available world wide.
 					</aside>
 				</section>
 				
@@ -125,7 +125,7 @@ Vector tiles contain geometries and attributes instead of images.
 				<section>
 					Why?
 					<aside class="notes">
-Vector tiles add an additional level of abstraction between the data is what the user sees, and that abstraction does have a cost, in terms of developer effort, technological complexity, and file storage, but the cost is outweighed by the benefits.
+Vector tiles add an additional level of abstraction between the data and what the user sees, and that abstraction does have a cost, in terms of developer effort, technological complexity, and file storage, but the cost is outweighed by the benefits.
 					</aside>
 				</section>
 
@@ -151,7 +151,7 @@ Modern computer have a wide range of screen pixel densities, with vector tiles y
 					<br>
 					<img src="on-device-vector.gif">
 					<aside class="notes">
-Map intefaces on desktop computers generally jump between fixed zoom levels, but on mobile devices users expect to be able to continuously zoom, so those nice crisp raster tiles are usually being re-sampled to display on screen, but with vector tiles the map can be rendered crisply at any zoom level. Vector tiles provide another big advantage on mobile devices, fewer files to download at high zoom levels: many vector tile sets will only go to zoom 14 which is equivalent to a scale of 1:34,000, but the tiles contain enough resolution in the geometries they can produce good looking maps up to zoom 19, or 1:1,000. In cases where users are downloading maps for offline use this is a huge win.
+Map intefaces on desktop computers generally jump between fixed zoom levels, but on mobile devices users expect to be able to continuously zoom, so those nice crisp raster tiles are usually being re-sampled to display on screen, but with vector tiles the map can be rendered crisply at any zoom level. Vector tiles provide another big advantage on mobile devices, fewer files to download at high zoom levels: many vector tile sets will only go to zoom 14 which is equivalent to a scale of 1:34,000, but the tiles contain enough resolution in the geometries that they can produce good looking maps up to zoom 19, or 1:1,000. In cases where users are downloading maps for offline use this is a huge win.
 					</aside>
 				</section>
 
@@ -217,7 +217,7 @@ One of the most challenging aspects of rendering maps with vector tiles is label
 					<br>
 					<img src="park-labels-bad.png">
 					<aside class="notes">
-It's a common technique to label the center of a polygon, but this doesn't work with vector tiles, because when a polygon crosses multiple tiles, each tile has it's own chunk of the polygon, and the polygon on each tile is also never what you want to do. The solution to this is to pre-calculate the label positions, and add them as a separate layer. GaiaTopo does this for several layers, including parks, and lakes.
+It's a common technique to label the center of a polygon, but this doesn't work with vector tiles, because when a polygon crosses multiple tiles, each tile has it's own chunk of the polygon, and labeling the polygon on each tile is never what you want to do. The solution to this is to pre-calculate the label positions, and add them as a separate layer. GaiaTopo does this for several layers, including parks, and lakes.
 					</aside>
 				</section>
 
@@ -268,7 +268,7 @@ This is the SQL query I ended up with for the peak layer, and even if you're fam
 						<br>
 						!bbox!
 						<aside class="notes">
-Mapnik runs queries through a pre-processor before sending them to postgres, and looks for special tokens, words surrounded by ! that get replaced, this query uses 3. scale_denominator get replaced with the denominator of the scale of the map being rendered. pixel_width is the size of the pixel is the units of the coordinate system being used, in this case meters. !bbox! is the bounding box of the are being queried.
+Mapnik runs queries through a pre-processor before sending them to postgres, and looks for special tokens, words surrounded by ! that get replaced, this query uses 3. scale_denominator get replaced with the denominator of the scale of the map being rendered. pixel_width is the size of the pixel in the units of the coordinate system being used, in this case meters. !bbox! is the bounding box of the are being queried.
 						</aside>
 					</section>
 					<section>
@@ -322,7 +322,7 @@ end;
 $func$;
 						</pre>
 						<aside class="notes">
-This LabelGrid function takes a geometry, and a grid size, it snaps the geometry to a grid, then returns a text representation of the geometry.
+This LabelGrid function takes a geometry, and a grid size, it snaps the geometry to a grid, then returns a text representation of the geometry. We'll go over why this is useful in a few slides.
 						</aside>
 					</section>
 					<section>
@@ -379,7 +379,7 @@ ORDER BY grid_point, ele_sort DESC, osm_id
 						</pre>
 						<aside class="notes">
 So now lets go through this query line by line. We'll ignore the first line, because that gets executed last.
-We select some field from the database, osm_id is the unique id in the OpenStreetMap database for this object, way is the field that holds the geometry, and name is the name, then we get the elevation 3 times, once as feet, and once as meters, but those 2 return null if the value isn't set, or is invalid, so we select it a third time with a function that returns 0 instead of null to use for sorting. Then we use our LabelGrid function to generate this grid_point value, that gets used by the first line of the query to only select a single feature on each grid point. The size of the grid varies by zoom, it's larger at smaller zoom levels, and at zoom 14 it doesn't snap to a grid at all, so all features get included.
+We select some field from the database, osm_id is the unique id in the OpenStreetMap database for this object, way is the field that holds the geometry, and name is the name, then we get the elevation 3 times, once as meters, and once as feet, but those 2 return null if the value isn't set, or is invalid, so we select it a third time with a function that returns 0 instead of null to use for sorting. Then we use our LabelGrid function to generate this grid_point value, that gets used by the first line of the query to only select a single feature on each grid point. The size of the grid varies by zoom, it's larger at smaller zoom levels, and at zoom 14 it doesn't snap to a grid at all, so all features get included.
 We're selecting from the planet_osm_point table, which is the table all our point features we're imported into.
 Next we do some filtering, first we check the zoom level, the query should only run at zoom levels greater than 6, then we check if the feature overlaps the bounding box of the tile being rendered, then we check the natural field to pick out features tagged as peaks and volcanoes.
 Then we order the features, grid_point must be first, because we're selecting distinct values based on that, then we sort by elevation, then we sort by osm_id to break ties in case 2 features have the same grid point and same elevation because we need this sorting to be stable.
@@ -394,7 +394,9 @@ Then we order the features, grid_point must be first, because we're selecting di
 					<br>
 					<img src="roads-low-zoom.png">
 					<aside class="notes">
-Filtering the right data out of OpenStreetMap to display at low zoom levels is tricky, and requires human judgment to be applied in many cases to choose the right features to display. Rather than trying to do that filtering, I ended up using data from another source, NaturalEarth, that has been curated by humans at low zoom levels. Natural Earth is a public domain map dataset available at 1:10m, 1:50m, and 1:110 million scales, produced by volunteers and supported by NACIS. There are many datasets available, all curated by human cartographers, and most feature have a scalerank field that can be used to bring appropriate features for each zoom level.
+Another feature of Gaia Topo is it needed to be available at all zoom levels, from the whole planet, down to 1:1000 scale. Making the map look good at 1:1000 was easy, making it look good at 1:300 million was far more challenging, and is still a work in progress.
+Filtering the right data out of OpenStreetMap to display at low zoom levels is tricky, and requires human judgment to be applied in many cases to choose the right features to display. Rather than trying to do that filtering, I ended up using data from another source, NaturalEarth. Natural Earth is a public domain map dataset available at 1:10 million, 1:50 million, and 1:110 million scales, produced by volunteers and supported by NACIS. There are many datasets available, both raster and vector, all curated by human cartographers, and most vector feature have a scalerank field that can be used to bring appropriate features for each zoom level.
+The image you see on the left shows the results of many hours spent trying to write a query for roads at zoom 6 from OpenStreetMap data, the image on the right shows the results of a very simple query using the natural earth 1:10 million vector road layer, and filtering based on the scalerank field.
 					</aside>
 				</section>
 
