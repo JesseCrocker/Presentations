@@ -403,12 +403,27 @@ Then we order the features, grid_point must be first, because we're selecting di
 					<img src="roads-low-zoom.png">
 					<aside class="notes">
 Another feature of Gaia Topo is it needed to be available at all zoom levels, from the whole planet, down to 1:1000 scale. Making the map look good at 1:1000 was easy, making it look good at 1:300 million was far more challenging, and is still a work in progress.
-Filtering the right data out of OpenStreetMap to display at low zoom levels is tricky, and requires human judgment to be applied in many cases to choose the right features to display. Rather than trying to do that filtering, I ended up using data from another source, NaturalEarth. Natural Earth is a public domain map dataset available at 1:10 million, 1:50 million, and 1:110 million scales, produced by volunteers and supported by NACIS. There are many datasets available, both raster and vector, all curated by human cartographers, and most vector feature have a scalerank field that can be used to bring appropriate features for each zoom level.
+Filtering the right data out of OpenStreetMap to display at low zoom levels is tricky, and requires human judgment to be applied in many cases to choose the right features to display. Rather than trying to do that filtering, I ended up using data from another source, NaturalEarth. Natural Earth is a public domain map dataset available at 1:10 million, 1:50 million, and 1:110 million scales, produced by volunteers and supported by NACIS. There are many datasets available, both raster and vector, all curated by human cartographers, and most vector feature have a scalerank field that can be used to bring in appropriate features for each zoom level.
 The image you see on the left shows the results of many hours spent trying to write a query for roads at zoom 6 from OpenStreetMap data, the image on the right shows the results of a very simple query using the natural earth 1:10 million vector road layer, and filtering based on the scalerank field.
+Currently GaiaTopo is using several layers from natural earth: rivers, lakes, roads, country borders at 3 different scales, state borders, roads, and cities, but none of them are used at zoom levels greater than 9.
 					</aside>
 				</section>
 
 				<section>
+					Whats Next?
+					<aside class="notes">
+One thing you may have noticed in a few of these slides is that GaiaTopo doesn't show much in the way of land cover. Some of this is due to not fully utilizing the landcover data that is in OSM, but mostly it's due to OSM not having great landcover data. Landcover is well mapped in some areas, mostly around large cities, but in most of the US it's missing entirely, or there will be million acre chunks marked as forest. My next big project for GaiaTopo is improving the landcover, at low zoom levels we are going to use a raster landcover image from natural earth, at mid zoom levels the data will come from several different public domain land cover datasets derived from satellite imagery, and at high zoom levels it will use landcover from OSM where it is available, and fall back to using the data as the same mid zoom levels when it isn't. Other planned features include improving the selection of cities shown at each zoom level, adding shields for highways and national trails, and dynamically scalling the contour line interval based on the density of contour lines in a region.
+					</aside>
+				</section>
+
+				<section>
+					Slides:
+					<br>
+					https://jessecrocker.github.io/Presentations/MAGIP-2016/
+					<br>
+					<br>
+					Map:
+					<br>
 					http://www.GaiaGPS.com
 					<aside class="notes">
 					</aside>
